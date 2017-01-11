@@ -1,5 +1,5 @@
 <?php
-	echo'blogsコントローラーが呼ばれました<br>';
+	// echo'blogsコントローラーが呼ばれました<br>';
 	//モデルを呼び出す
 	require('models/blog.php');
 
@@ -25,14 +25,18 @@
 	class BlogsController {
 		
 		function index(){
-			echo 'コントローラのindex()が呼び出されました！<br>';
+			// echo 'コントローラのindex()が呼び出されました！<br>';
 			//モデルを呼び出す
 			$blog = new Blog();
-			$blog->index();
+			$viewOptions = $blog->index();
+			$action = 'index';
+			// var_dump($viewOptions);
+			require('views/layout/application.php');
+
 		}
 
 		function add(){
-			echo 'add()が呼び出されました。<br>';
+			// echo 'add()が呼び出されました。<br>';
 		}
 	}
 ?>
