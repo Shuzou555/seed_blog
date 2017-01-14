@@ -37,5 +37,45 @@
 			//取得結果を返す
 			return $rtn;
 		}
+
+		function add(){
+			// echo 'モデルのindex()が呼び出されました<br/>';
+
+			
+		}
+
+		function show($id){
+			$sql = sprintf("SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` =%d",$id);
+			//$sql = "SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` =$id"　上記と同じ効果
+
+			//SQLの実行
+			$results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+
+			//実行結果を取得し、配列に格納
+			
+			$result = mysqli_fetch_assoc($results);
+
+			//取得結果を返す
+			return $result;
+		}
+
+
+			
+		
+
+		function create($blog_data){
+			// Insert文の記述 ''シングルコーテーションを　””ダブルコーテーションに変えても良い
+			$sql = sprintf("INSERT INTO `blogs`(`id`, `title`, `body`, `delete_flag`, `created`, `modified`) 
+								VALUES (NULL,'%s','%s',0,now(),CURRENT_TIMESTAMP);",$blog_data['title'],$blog_data['body']);
+
+			//SQL文の実行
+			$results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+			//実行結果を返す
+			return $results;
+		}
+
+
 	}
 ?>
